@@ -1,6 +1,6 @@
 import os
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from dotenv import load_dotenv
 from .utils import (get_facebook_follower_count, get_facebook_total_post_likes, 
                     get_instagram_follower_count, get_instagram_post_likes, 
@@ -69,3 +69,8 @@ def login_view(request):
             # Handle invalid login
             pass
     return render(request, 'login.html')
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('login') 

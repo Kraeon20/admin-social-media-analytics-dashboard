@@ -87,6 +87,12 @@
                     Calendar
                 </a>
             </li>
+
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="mb-0">Logout</button>
+            </form>
+            
         </ul>
     </div>
     <div class="sidebar-overlay"></div>
@@ -240,14 +246,14 @@
                             {{ twitter_followers }}
                         ],
                         backgroundColor: [
-                            'rgba(24, 119, 242, 0.8)',
-                            'rgba(188, 42, 141, 0.8)',
-                            'rgba(0, 0, 0, 0.8)'
+                        'rgba(75, 192, 192, 0.5)',
+                        'rgba(255, 99, 132, 0.5)',
+                        'rgba(0, 0, 0, 0.8)'
                         ],
                         borderColor: [
-                            'rgba(24, 119, 242, 1)',
-                            'rgba(188, 42, 141, 1)',
-                            'rgba(0, 0, 0, 1)'
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(0, 0, 0, 0.8)'
                         ],
                         borderWidth: 1
                     }]
@@ -274,14 +280,14 @@
                     {{ twitter_likes }}
                 ],
                 backgroundColor: [
-                    'rgba(24, 119, 242, 0.8)',
-                    'rgba(188, 42, 141, 0.8)',
-                    'rgba(0, 0, 0, 0.8)'
+                'rgba(75, 192, 192, 0.5)',
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(0, 0, 0, 0.8)'
                 ],
                 borderColor: [
-                    'rgba(24, 119, 242, 1)',
-                    'rgba(188, 42, 141, 1)',
-                    'rgba(0, 0, 0, 1)'
+                'rgba(75, 192, 192, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(0, 0, 0, 0.8)'
                 ],
                 borderWidth: 1
             }]
