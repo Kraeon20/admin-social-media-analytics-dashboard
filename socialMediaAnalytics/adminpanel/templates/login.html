@@ -94,7 +94,7 @@
 </head>
 
 <body>
-    <form action="{% url 'login' %}" method="post">
+    <form id="login-form" action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <div class="login-box">
             <h1>Login</h1>
@@ -109,15 +109,21 @@
                 <input type="password" placeholder="Password" name="password" value="">
             </div>
 
-            <input class="button" type="submit" name="login" value="Sign In">
+            <button type="submit" class="button" name="login" id="login-btn">Sign In</button>
 
-            <a href="https://www.facebook.com/v12.0/dialog/oauth?client_id=YOUR_FACEBOOK_APP_ID&redirect_uri=https://your.ngrok.io/accounts/facebook/login/callback/" class="button">
-                <i class="fa fa-facebook"></i>
-                <span>Login with Facebook</span>
-            </a>
+            <!-- Loading animation -->
+            <div class="loader" id="loader"></div>
         </div>
-
     </form>
+
+    <!-- Add your JavaScript code here -->
+    <script>
+        document.getElementById("login-form").addEventListener("submit", function() {
+            // Show loading animation when the form is submitted
+            document.getElementById("loader").style.display = "block";
+            document.getElementById("login-btn").style.display = "none";
+        });
+    </script>
 </body>
 
 </html>

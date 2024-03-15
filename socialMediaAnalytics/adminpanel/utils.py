@@ -5,11 +5,6 @@ from django.contrib.auth import authenticate, login
 
 
 
-# Constants
-total_instagram_likes = 1
-total_twitter_likes = 1
-instagram_followers = 2
-twitter_followers = 1
 
 page_id = os.environ.get('FACEBOOK_PAGE_ID')
 access_token = os.environ.get('FACEBOOK_ACCESS_TOKEN')

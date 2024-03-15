@@ -58,6 +58,10 @@
                             Change Password
                         </a>
                     </li>
+                    <!-- Add link for resetting authentication -->
+                    <li class="sidebar-dropdown-menu-item">
+                        <a href="{% url 'reset-auth' %}">Reset Authentication</a>
+                    </li>
                 </ul>
             </li>
         
@@ -88,9 +92,9 @@
                 </a>
             </li>
 
-            <form action="{% url 'logout' %}" method="post">
+            <form action="{% url 'logout' %}" method="post" class="logout-form">
                 {% csrf_token %}
-                <button type="submit" class="mb-0">Logout</button>
+                <button type="submit" class="btn btn-outline-primary">Logout</button>
             </form>
             
         </ul>
