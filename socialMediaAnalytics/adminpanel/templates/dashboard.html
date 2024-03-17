@@ -34,36 +34,6 @@
                     Dashboard
                 </a>
             </li>
-            <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Custom</li>
-                
-            <li class="sidebar-menu-item has-dropdown">
-                <a href="#">
-                    <i class="ri-user-line sidebar-menu-item-icon"></i>
-                    Authentication
-                    <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
-                </a>
-                <ul class="sidebar-dropdown-menu">
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Register
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Reset Password
-                        </a>
-                    </li>
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="#">
-                            Change Password
-                        </a>
-                    </li>
-                    <!-- Add link for resetting authentication -->
-                    <li class="sidebar-dropdown-menu-item">
-                        <a href="{% url 'reset-auth' %}">Reset Authentication</a>
-                    </li>
-                </ul>
-            </li>
         
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Platform</li>
             <li class="sidebar-menu-item has-dropdown">
@@ -91,22 +61,16 @@
                     Calendar
                 </a>
             </li>
-
-            <form action="{% url 'logout' %}" method="post" class="logout-form">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-outline-primary">Logout</button>
-            </form>
-            
         </ul>
     </div>
     <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
     <!-- start: Main -->
-    <main class="bg-light pt-4">
+    <main class="bg-light pt-0">
         <div class="p-2">
             <!-- start: Navbar -->
-            <nav class="px-3 py-2 bg-white rounded shadow-sm">
+            <nav class="px-3 py-2 bg-white rounded shadow-sm mt-3">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
                 <h5 class="fw-bold mb-0 me-auto">Dashboard</h5>
                 <div class="dropdown me-3 d-none d-sm-block">
@@ -125,88 +89,85 @@
                                 </div>
                                 <span class="badge bg-primary rounded-pill">14</span>
                             </a>
-                            <a href="#"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                <div class="me-auto">
-                                    <div class="fw-semibold">Subheading</div>
-                                    <span class="fs-7">Content for list item</span>
-                                </div>
-                                <span class="badge bg-primary rounded-pill">14</span>
-                            </a>
-                            <a href="#"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                <div class="me-auto">
-                                    <div class="fw-semibold">Subheading</div>
-                                    <span class="fs-7">Content for list item</span>
-                                </div>
-                                <span class="badge bg-primary rounded-pill">14</span>
-                            </a>
-                            <a href="#"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                <div class="me-auto">
-                                    <div class="fw-semibold">Subheading</div>
-                                    <span class="fs-7">Content for list item</span>
-                                </div>
-                                <span class="badge bg-primary rounded-pill">14</span>
-                            </a>
-                            <a href="#"
-                                class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                <div class="me-auto">
-                                    <div class="fw-semibold">Subheading</div>
-                                    <span class="fs-7">Content for list item</span>
-                                </div>
-                                <span class="badge bg-primary rounded-pill">14</span>
-                            </a>
+                            <!-- Add more list items as needed -->
                         </div>
                     </div>
                 </div>
                 <div class="dropdown">
-                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="me-2 d-none d-sm-block">Eastman Johnson</span>
                         <img class="navbar-profile-image"
-                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cGVyc29ufGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                            alt="Image">
+                            src="{% static 'media/admin.png' %}" alt="Image"> <!-- Change the image source accordingly -->
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        <!-- Other dropdown items -->
+                        <li><a class="dropdown-item" href="#">Profile</a></li>
+                        <li><a class="dropdown-item" href="{% url 'settings' %}">Settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li> <!-- Logout link -->
                     </ul>
                 </div>
-            </nav>
+            </nav>            
             <!-- end: Navbar -->
 
             <!-- start: Content -->
-            <div class="py-4">
-                <!-- start: Summary -->
-                <div class="row g-3">
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div 
-                            class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
-                            <div>
-                                <i class="ri-group-line summary-icon bg-primary mb-2"></i>
-                                <div>Total Followers</div>
+            <!-- start: Summary -->
+            <div class="row g-3 mt-2">
+                <!-- Followers Summary -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <img src="{% static 'media/followers.png' %}" alt="Followers" class="icon icon-fit">
+                                    <span class="fw-bold fs-8 ms-2">Total Followers</span>
+                                </div>
+                                <div>
+                                    <span class="fs-3">{{ total_followers }}</span>
+                                </div>
                             </div>
-                            <h4>{{ total_followers }}</h4>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div
-                            class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
-                            <div>
-                                <i class="ri-thumb-up-line summary-icon bg-indigo mb-2"></i>
-                                <div>Total Likes</div>
-                            </div>
-                            <h4>{{ total_likes }}</h4>
                         </div>
                     </div>
                 </div>
-                <!-- end: Summary -->
-                
+
+                <!-- Likes Summary -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <img src="{% static 'media/likes.png' %}" alt="Likes" class="icon icon-fit">
+                                    <span class="fw-bold fs-8 ms-2">Total Likes</span>
+                                </div>
+                                <div>
+                                    <span class="fs-3">{{ total_likes }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments Summary -->
+                <div class="col-md-4">
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <img src="{% static 'media/comments.png' %}" alt="Comments" class="icon icon-fit">
+                                    <span class="fw-bold fs-8 ms-2">Total Comments</span>
+                                </div>
+                                <div>
+                                    <span class="fs-3">{{ total_comments }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: Summary -->
 
                 <div class="row g-3 mt-2">
-                    <div class="col-12 col-md-7 col-xl-8">
+                    <div class="col-12 col-md-7 col-xl-6">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
                                 Followers
@@ -216,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5 col-xl-4">
+                    <div class="col-12 col-md-5 col-xl-3">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
                                 Likes
@@ -226,53 +187,108 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-5 col-xl-3">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white">
+                                Comments
+                            </div>
+                            <div class="card-body">
+                                <canvas id="commentsPieChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- end: Graph -->
             </div>
             <!-- end: Content -->
+
+            <!-- start: Table Chart -->
+            <div class="row g-3 mt-2">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm h-100">
+                        <div class="card-header bg-white">
+                            <!-- Add table header content here -->
+                        </div>
+                        <div class="card-body" style="background-color: #f8f9fa;"> <!-- Set background color for the table -->
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Num.</th>
+                                        <th>Platform</th>
+                                        <th>Followers</th>
+                                        <th>Likes</th>
+                                        <th>Comments</th>
+                                        <th>Average</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        {% for platform in platforms %}
+                                        <tr>
+                                            <td>{{ forloop.counter }}</td>
+                                            <td>{{ platform.name }}</td>
+                                            <td>{{ platform.followers }}</td>
+                                            <td>{{ platform.likes }}</td>
+                                            <td>{{ platform.comments }}</td>
+                                            <td>{{ platform.average }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end: Table Chart -->
+
         </div>
     </main>
     <!-- end: Main -->
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"
+        integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+    <!-- Add this script after the existing JavaScript code -->
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const followersChart = new Chart(document.getElementById('followersChart'), {
-                type: 'bar',
-                data: {
-                    labels: ['Facebook', 'Instagram', 'Twitter'],
-                    datasets: [{
-                        label: 'Followers',
-                        data: [
-                            {{ facebook_followers }},
-                            {{ instagram_followers }},
-                            {{ twitter_followers }}
-                        ],
-                        backgroundColor: [
-                        'rgba(75, 192, 192, 0.5)',
-                        'rgba(255, 99, 132, 0.5)',
-                        'rgba(0, 0, 0, 0.8)'
-                        ],
-                        borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(0, 0, 0, 0.8)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: {
-                            beginAtZero: true
-                        }
-                    }
+        const followersChart = new Chart(document.getElementById('followersChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Facebook', 'Instagram', 'Twitter'],
+            datasets: [{
+                label: 'Followers',
+                data: [
+                    {{ facebook_followers }},
+                    {{ instagram_followers }},
+                    {{ twitter_followers }}
+                ],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)' // Change black color to a different color
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)' // Change black color to a different color
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
-            });
-        });
+            }
+        }
+    });
 
-        const likesPieChart = new Chart(document.getElementById('likesPieChart'), {
+    const likesPieChart = new Chart(document.getElementById('likesPieChart'), {
         type: 'doughnut',
         data: {
             labels: ['Facebook', 'Instagram', 'Twitter'],
@@ -284,14 +300,14 @@
                     {{ twitter_likes }}
                 ],
                 backgroundColor: [
-                'rgba(75, 192, 192, 0.5)',
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(0, 0, 0, 0.8)'
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)' // Change black color to a different color
                 ],
                 borderColor: [
-                'rgba(75, 192, 192, 1)',
-                'rgba(255, 99, 132, 1)',
-                'rgba(0, 0, 0, 0.8)'
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)' // Change black color to a different color
                 ],
                 borderWidth: 1
             }]
@@ -301,12 +317,48 @@
             maintainAspectRatio: false,
             plugins: {
                 legend: {
-                    position: 'right',
+                    position: 'bottom', // Change legend position to bottom
                 },
             },
         }
     });
-        </script>
+
+    const commentsPieChart = new Chart(document.getElementById('commentsPieChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Facebook', 'Instagram', 'Twitter'],
+            datasets: [{
+                label: 'Comments',
+                data: [
+                    {{ facebook_comments }},
+                    {{ instagram_comments }},
+                    {{ twitter_comments }}
+                ],
+                backgroundColor: [
+                    'rgba(75, 192, 192, 0.5)',
+                    'rgba(255, 99, 132, 0.5)',
+                    'rgba(255, 206, 86, 0.5)' // Change black color to a different color
+                ],
+                borderColor: [
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(255, 206, 86, 1)' // Change black color to a different color
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom', // Change legend position to bottom
+                },
+            },
+        }
+    });
+    </script>
+
     <!-- end: JS -->
 </body>
 

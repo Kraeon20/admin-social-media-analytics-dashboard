@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.facebook',
     'socialMediaAnalytics',
+    'adminpanel',
+    'adminsettings'
 ]
 
 MIDDLEWARE = [

@@ -76,8 +76,6 @@ body {
     font-family: 'Work Sans', sans-serif;
 }
 
-
-
 .text-indigo:hover,
 .text-indigo {
     color: var(--bs-indigo);
@@ -282,7 +280,16 @@ nav {
     font-size: 1.5rem;
     border-radius: 50%;
 }
-.summary-primary,
+.icon-fit {
+    max-width: 50px; /* Adjust as needed */
+    max-height: 50px; /* Adjust as needed */
+}
+/* nav {
+    position: relative;
+    top: -20px; 
+    z-index: 1000; 
+} */
+/* .summary-primary,
 .summary-indigo,
 .summary-success,
 .summary-danger {
@@ -323,7 +330,7 @@ nav {
 }
 .summary-danger:hover {
     background-color: var(--bs-danger) !important;
-}
+} */
 /* end: Suummary */
 /* end: Main */
 

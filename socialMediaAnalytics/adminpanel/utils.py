@@ -53,6 +53,26 @@ def get_facebook_follower_count(page_id, access_token):
         return None
 
 
+def get_facebook_total_post_comments(page_id, access_token):
+    api_endpoint_posts = f"https://graph.facebook.com/{page_id}/posts?fields=comments.limit(0).summary(true)&access_token={access_token}"
+
+    total_comments = 0
+
+    try:
+        response = requests.get(api_endpoint_posts)
+        data = response.json()
+
+        for post in data.get('data', []):
+            comments_summary = post.get('comments', {}).get('summary', {})
+            total_comments += comments_summary.get('total_count', 0)
+
+        return total_comments
+
+    except Exception as e:
+        print(f"Error fetching total comments: {e}")
+        return None
+
+
 
 def get_instagram_follower_count():
     return 1
@@ -67,4 +87,11 @@ def get_instagram_post_likes():
 
 
 def get_twitter_post_likes():
+    return 1
+
+
+def get_instagram_post_comments():
+    return 1
+
+def get_twitter_post_comments():
     return 1

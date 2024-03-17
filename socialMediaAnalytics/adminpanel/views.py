@@ -5,12 +5,16 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from dotenv import load_dotenv
+from operator import attrgetter
 from .utils import (get_facebook_follower_count,
                     get_facebook_total_post_likes, 
                     get_instagram_follower_count,
+                    get_facebook_total_post_comments,
                     get_instagram_post_likes, 
                     get_twitter_follower_count,
-                    get_twitter_post_likes)
+                    get_twitter_post_likes, 
+                    get_instagram_post_comments,
+                    get_twitter_post_comments)
 
 
 load_dotenv()
@@ -32,6 +36,39 @@ def dashboard(request):
                    get_instagram_post_likes() +
                    get_twitter_post_likes())
     
+    total_comments = (get_facebook_total_post_comments(page_id, access_token) +
+                      get_instagram_post_comments() +
+                      get_twitter_post_comments())
+    
+
+    # Fetch data for each platform
+    facebook_followers = get_facebook_follower_count(page_id, access_token)
+    instagram_followers = get_instagram_follower_count()
+    twitter_followers = get_twitter_follower_count()
+
+    facebook_likes = get_facebook_total_post_likes(page_id, access_token)
+    instagram_likes = get_instagram_post_likes()
+    twitter_likes = get_twitter_post_likes()
+
+    facebook_comments = get_facebook_total_post_comments(page_id, access_token)
+    instagram_comments = get_instagram_post_comments()
+    twitter_comments = get_twitter_post_comments()
+
+    # Calculate averages
+    facebook_avg = round((facebook_followers + facebook_likes + facebook_comments) / 3)
+    instagram_avg = round((instagram_followers + instagram_likes + instagram_comments) / 3)
+    twitter_avg = round((twitter_followers + twitter_likes + twitter_comments) / 3)
+    
+    # Create a list of platform objects
+    platforms = [
+        {'name': 'Facebook', 'followers': facebook_followers, 'likes': facebook_likes, 'comments': facebook_comments, 'average': facebook_avg},
+        {'name': 'Instagram', 'followers': instagram_followers, 'likes': instagram_likes, 'comments': instagram_comments, 'average': instagram_avg},
+        {'name': 'Twitter', 'followers': twitter_followers, 'likes': twitter_likes, 'comments': twitter_comments, 'average': twitter_avg}
+    ]
+
+    # Sort platforms based on average engagement (descending order)
+    platforms.sort(key=lambda x: x['average'], reverse=True)
+    
     # Pass total_likes to the template context
     context = {
         'facebook_followers': get_facebook_follower_count(page_id, access_token),
@@ -40,8 +77,13 @@ def dashboard(request):
         'facebook_likes': get_facebook_total_post_likes(page_id, access_token),
         'instagram_likes': get_instagram_post_likes(),
         'twitter_likes': get_twitter_post_likes(),
+        'facebook_comments': get_facebook_total_post_comments(page_id, access_token),
+        'instagram_comments': get_instagram_post_comments(),
+        'twitter_comments': get_twitter_post_comments(),
         'total_followers': total_followers,
         'total_likes': total_likes,
+        "total_comments": total_comments,
+        'platforms': platforms,
     }
     
     return render(request, 'dashboard.html', context)
@@ -66,29 +108,6 @@ def login_view(request):
 
 
 
-
-
-
-def reset_authentication(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        # Check if the username exists
-        try:
-            user = User.objects.get(username=username)
-        except User.DoesNotExist:
-            messages.error(request, 'User with the provided username does not exist.')
-            return redirect('reset-auth')
-
-        # Reset password
-        user.set_password(password)
-        user.save()
-
-        messages.success(request, 'Authentication reset successfully.')
-        return redirect('reset-auth')
-
-    return render(request, 'reset_authentication.html')
 
 
 

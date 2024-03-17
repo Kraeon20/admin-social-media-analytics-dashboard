@@ -33,10 +33,5 @@ $(document).ready(function() {
     if(window.innerWidth < 768) {
         $('.sidebar').addClass('collapsed')
     }
-    // end: Sidebar
-
-
-
-
-    
+    // end: Sidebar  
 })
